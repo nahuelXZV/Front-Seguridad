@@ -18,7 +18,7 @@ export class AuthService {
   login(email: string, password: string): Observable<Login> {
     return this.http.post<Login>(`${this.baseUrl}/login`, { email, password });
   }
-  
+
   register(user: Register): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/users`, user);
   }
@@ -29,7 +29,7 @@ export class AuthService {
     return this.http.post<boolean>(`${this.baseUrl}/checkToken`, { token }).
       pipe(
         map(user => !!user),
-        map(isAuth => {
+        map(isAuth => { 
           if (!isAuth) this.logout();
           return isAuth;
         }),

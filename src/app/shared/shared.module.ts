@@ -23,7 +23,12 @@ import { AuthModule } from '../auth/auth.module';
     CommonModule,
     SharedRoutingModule,
     MaterialModule,
-    AuthModule
+    AuthModule,
+  ],
+  exports: [
+    LayoutPageComponent,
+    AsideComponent,
+    NavComponent,
   ]
 })
 export class SharedModule { }

@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import("./shared/shared.module").then(m => m.SharedModule)
   },
   {
+    path: "users",
+    loadChildren: () => import("./users/users.module").then(m => m.UsersModule),
+  },
+  {
     path: '404',
     component: Error404PageComponent
   },
