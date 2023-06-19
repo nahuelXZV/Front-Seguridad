@@ -3,6 +3,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Login, User } from '../interfaces';
+import { Register } from '../interfaces/register.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class AuthService {
 
   login(email: string, password: string): Observable<Login> {
     return this.http.post<Login>(`${this.baseUrl}/login`, { email, password });
+  }
+  
+  register(user: Register): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/users`, user);
   }
 
   checkToken(): Observable<boolean> {

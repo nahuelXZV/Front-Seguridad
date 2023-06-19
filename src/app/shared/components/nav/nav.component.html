@@ -20,7 +20,7 @@
     <button mat-button [matMenuTriggerFor]="menu_profile" aria-label="Ejemplo de icono-botón con un menú" class="">
       <!-- icono de perfil -->
       <span class="flex flex-row items-center">
-        Nahuel Zalazar
+        {{user.nombre + ' ' + user.apellido | titlecase}}
         <mat-icon class="ml-2"> account_circle </mat-icon>
       </span>
     </button>
