@@ -30,11 +30,8 @@ export class UsersComponent {
 
   ngOnInit(): void {
     this.userService.getAll().subscribe(resp => {
-      console.log(resp);
       this.users = resp;
       this.dataSource = new MatTableDataSource(resp);
-      console.log('dataSource');
-      console.log(this.dataSource);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
@@ -42,7 +39,6 @@ export class UsersComponent {
   deleteUser(user: User) {
     console.log('Usuario eliminado', user);
     this.userService.delete(user.id).subscribe(resp => {
-      console.log(resp);
       this.changeDetectorRef.detectChanges();
     });
   }
