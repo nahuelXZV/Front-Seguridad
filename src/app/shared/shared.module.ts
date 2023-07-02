@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { Error404PageComponent } from './pages/error404-page/error404-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AuthModule } from '../auth/auth.module';
+import { TestigosModule } from '../testigos/testigos.module';
 
 
 @NgModule({

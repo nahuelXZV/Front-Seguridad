@@ -29,18 +29,27 @@ export class LoginPageComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
+
     const { email, password } = this.loginForm.value;
+
     this.authService.login(email, password)
-      .pipe(
-        tap(resp => localStorage.setItem('token', resp.accessToken)),
-        tap(resp => localStorage.setItem('user', JSON.stringify(resp.user))),
-        catchError(err => of(
-          this.showSnackbar(err.error.message, 'Cerrar')
-        ))
-      ).subscribe(resp => {
-        this.router.navigate(['home']);
-        this.showSnackbar('Sesión iniciada correctamente', 'Cerrar');
-      });
+      .subscribe(
+        resp => {
+          localStorage.setItem('token', resp.accessToken);
+          localStorage.setItem('user', JSON.stringify(resp.user));
+          this.router.navigate(['home']);
+          this.showSnackbar('Sesión iniciada correctamente', 'Cerrar');
+        },
+        err => {
+          let errorMessage = 'Ocurrió un error durante el inicio de sesión';
+
+          if (err.error && err.error.message) {
+            errorMessage = err.error.message;
+          }
+
+          this.showSnackbar(errorMessage, 'Cerrar');
+        }
+      );
   }
 
   isValidField(field: string): boolean | null {

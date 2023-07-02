@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TestigosPageComponent } from './pages/testigos-page/testigos-page.component';
 import { AuthenticationGuard } from '../auth/guards/authentication.guard';
-import { UsersComponent } from './pages/users/users.component';
-import { UsersPageComponent } from './pages/users-page/users-page.component';
-import { CreateUserComponent } from './pages/create-user/create-user.component';
-import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { TestigosComponent } from './pages/testigos/testigos.component';
+import { CreateTestigoComponent } from './pages/create-testigo/create-testigo.component';
+import { UpdateTestigoComponent } from './pages/update-testigo/update-testigo.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: UsersPageComponent,
+    component: TestigosPageComponent,
     canActivate: [AuthenticationGuard],
     children: [
       {
         path: '',
-        component: UsersComponent,
+        component: TestigosComponent,
         data: { name: 'home' },
       },
       {
         path: 'create',
-        component: CreateUserComponent,
+        component: CreateTestigoComponent,
         data: { name: 'home' },
       },
       {
         path: 'edit/:id',
-        component: UpdateUserComponent,
+        component: UpdateTestigoComponent,
         data: { name: 'home' },
       },
       {
@@ -39,4 +39,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UsersRoutingModule { }
+export class TestigosRoutingModule { }

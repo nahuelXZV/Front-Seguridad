@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import("./users/users.module").then(m => m.UsersModule),
   },
   {
+    path: "testigos",
+    loadChildren: () => import("./testigos/testigos.module").then(m => m.TestigosModule),
+  },
+  {
     path: '404',
     component: Error404PageComponent
   },
