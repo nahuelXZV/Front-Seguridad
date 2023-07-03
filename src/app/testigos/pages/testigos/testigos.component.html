@@ -1,0 +1,61 @@
+<div class="mt-4 mb-4">
+  <div class="flex flex-row justify-between ">
+    <p class="text-lg font-bold">Testigos</p>
+  </div>
+
+  <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" [routerLink]="['/testigos/create']" class=" my-2 p-4">Crear Testigo</button>
+
+
+  <mat-table [dataSource]="testigos">
+
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.nombre }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.apellido }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <mat-header-cell *matHeaderCellDef>Telefono</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.telefono }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cedulaIdentidad">
+      <mat-header-cell *matHeaderCellDef>CI</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.cedulaIdentidad}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nacionalidad">
+      <mat-header-cell *matHeaderCellDef>Nacionalidad</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.nacionalidad}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sexo">
+      <mat-header-cell *matHeaderCellDef>Sexo</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.sexo}}</mat-cell>
+    </ng-container>
+
+    <!-- Otros campos -->
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">
+        <button mat-icon-button (click)="updateTestigo(testigo.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTestigo(testigo.id)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+</div>
+

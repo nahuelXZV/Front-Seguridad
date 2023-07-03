@@ -16,33 +16,26 @@ export class UsersService {
   ) { }
 
 
-  getAll(): Observable<User[]> {
+  getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}`);
   }
 
-  getById(id: string): Observable<User | null> {
+  getUser(id: string): Observable<User | null> {
     return this.http.get<User>(`${this.baseUrl}/${id}`).
       pipe(
         catchError(err => of(null))
       );
   }
 
-  getBy(key: string, value: any): Observable<User | null> {
-    return this.http.get<User>(`${this.baseUrl}/by/${key}/${value}`).
-      pipe(
-        catchError(err => of(null))
-      );
-  }
-
-  create(data: any): Observable<User> {
+  createUser(data: any): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}`, data);
   }
 
-  update(id: string, data: any): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/${id}`, data);
+  updateUser(userId: string,data: any): Observable<User> {
+    return this.http.patch<User>(`${this.baseUrl}/${userId}`, data);
   }
 
-  delete(id: string): Observable<boolean> {
+  deleteUser(id: string): Observable<boolean> {
     return this.http.delete(`${this.baseUrl}/${id}`).
       pipe(
         map(() => true),

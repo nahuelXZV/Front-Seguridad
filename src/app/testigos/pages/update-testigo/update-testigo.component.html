@@ -1,0 +1,96 @@
+<h2>Editar Testigo<h2>
+  <hr>
+
+  <form [formGroup]="editForm" (ngSubmit)="saveTestigo()" class="m-2 p-4">
+    <mat-grid-list cols="1" rowHeight="70px" [style.width]="'20%'">
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" placeholder="Nombre">
+          <mat-error *ngIf="editForm.controls['nombre'].invalid && editForm.controls['nombre'].touched">
+            El nombre es requerido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido" placeholder="Apellido">
+          <mat-error *ngIf="editForm.controls['apellido'].invalid && editForm.controls['apellido'].touched">
+            El apellido es requerido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Telefono</mat-label>
+          <input matInput formControlName="telefono" placeholder="Telefono">
+          <mat-error *ngIf="editForm.controls['telefono'].invalid && editForm.controls['telefono'].touched">
+            El telfono es requerido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>CI</mat-label>
+          <input matInput formControlName="cedulaIdentidad" type="cedulaIdentidad" placeholder="CI">
+          <mat-error *ngIf="editForm.controls['cedulaIdentidad'].invalid && editForm.controls['cedulaIdentidad'].touched">
+            El ci es requerido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Nacionalidad</mat-label>
+          <input matInput formControlName="nacionalidad" type="nacionalidad" placeholder="Nacionalidad">
+          <mat-error *ngIf="editForm.controls['nacionalidad'].invalid && editForm.controls['nacionalidad'].touched">
+            La nacionalidad es requerido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="sexo" placeholder="Seleccionar el sexo">
+            <mat-option *ngFor="let sexo of sexos" [value]="sexo">
+              {{ sexo }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="editForm.controls['sexo'].invalid && editForm.controls['sexo'].touched">
+            El sexo es requerido
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Infraccion</mat-label>
+          <mat-select formControlName="infraccion" placeholder="Seleccionar la infraccion">
+            <mat-option *ngFor="let infraccion of infracciones" [value]="infraccion.id">
+              {{ infraccion.id }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="editForm.controls['infraccion'].invalid && editForm.controls['sexo'].touched">
+            La infraccion es requerida
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+    <!-- Otros campos del formulario -->
+
+    <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" type="submit" [disabled]="editForm.invalid" class="m-2">
+      Guardar
+    </button>
+    <button mat-raised-button color="cancel" type="submit" [routerLink]="['/testigos']" >
+      Cancelar
+    </button>
+  </form>

@@ -22,6 +22,10 @@ const routes: Routes = [
     loadChildren: () => import("./users/users.module").then(m => m.UsersModule),
   },
   {
+    path: "testigos",
+    loadChildren: () => import("./testigos/testigos.module").then(m => m.TestigosModule),
+  },
+  {
     path: "estadios",
     loadChildren: () => import("./estadio/estadio.module").then(m => m.EstadioModule),
     data: { name: 'estadios' }
@@ -30,6 +34,7 @@ const routes: Routes = [
     path: "infractores",
     loadChildren: () => import("./infractor/infractor.module").then(m => m.InfractorModule),
     data: { name: 'infractores' }
+
   },
   {
     path: '404',

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UsersRoutingModule } from './users-routing.module';
+import { TestigosRoutingModule } from './testigos-routing.module';
+import { TestigosComponent } from './pages/testigos/testigos.component';
+import { TestigosPageComponent } from './pages/testigos-page/testigos-page.component';
+import { CreateTestigoComponent } from './pages/create-testigo/create-testigo.component';
+import { UpdateTestigoComponent } from './pages/update-testigo/update-testigo.component';
 import { SharedModule } from '../shared/shared.module';
-import { UsersComponent } from './pages/users/users.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { UsersPageComponent } from './pages/users-page/users-page.component';
-import { CreateUserComponent } from './pages/create-user/create-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UpdateUserComponent } from './pages/update-user/update-user.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -20,14 +20,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
-    UsersComponent,
-    UsersPageComponent,
-    CreateUserComponent,
-    UpdateUserComponent,
+    TestigosComponent,
+    TestigosPageComponent,
+    CreateTestigoComponent,
+    UpdateTestigoComponent
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule,
+    TestigosRoutingModule,
     SharedModule,
     MatTableModule,
     MatIconModule,
@@ -38,7 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatGridListModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ]
 })
-export class UsersModule { }
+export class TestigosModule { }
