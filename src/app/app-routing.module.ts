@@ -26,6 +26,17 @@ const routes: Routes = [
     loadChildren: () => import("./testigos/testigos.module").then(m => m.TestigosModule),
   },
   {
+    path: "estadios",
+    loadChildren: () => import("./estadio/estadio.module").then(m => m.EstadioModule),
+    data: { name: 'estadios' }
+  },
+  {
+    path: "infractores",
+    loadChildren: () => import("./infractor/infractor.module").then(m => m.InfractorModule),
+    data: { name: 'infractores' }
+
+  },
+  {
     path: '404',
     component: Error404PageComponent
   },
