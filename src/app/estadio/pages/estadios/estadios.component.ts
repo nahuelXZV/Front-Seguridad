@@ -1,64 +1,44 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Estadio } from '../../interfaces/estadio.interface';
 import { EstadioService } from '../../services/estadio.service';
 
 @Component({
-  selector: 'estadios',
+  selector: 'estadio-estadios',
   templateUrl: './estadios.component.html',
   styleUrls: ['./estadios.component.css']
 })
-export class EstadiosComponent {
-  displayedColumns: string[] = ['nombre', 'departamento', 'ciudad', 'direccion', 'acciones'];
-  dataSource!: MatTableDataSource<Estadio>;
+export class EstadiosComponent implements OnInit {
   public estadios: Estadio[] = [];
-  public estadio!: Estadio;
+  displayedColumns: string[] = ['nombre', 'departamento', 'ciudad', 'direccion', 'acciones'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private estadioService: EstadioService,
-    private snackbar: MatSnackBar,
-    public dialog: MatDialog,
-    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.estadioService.getAll().subscribe(respEstadios => {
-      this.estadios = respEstadios;
-      this.dataSource = new MatTableDataSource(respEstadios);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.loadEstadios();
+  }
+
+  loadEstadios() {
+    this.estadioService.getAll().subscribe(estadios => {
+      this.estadios = estadios;
     });
   }
 
-  deleteEstadio(estadio: Estadio) {
-    this.estadioService.delete(estadio.id).subscribe(resp => {
-      const index = this.estadios.indexOf(estadio);
-      if (index !== -1) {
-        this.estadios.splice(index, 1);
-      }
-      this.changeDetectorRef.detectChanges();
-      console.log('Estadio eliminado', estadio);
+  deleteEstadio(estadioId: string) {
+    this.estadioService.delete(estadioId).subscribe(resp => {
+      this.loadEstadios();
     });
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  showSnackbar(message: string, action: string) {
-    this.snackbar.open(message, action, {
-      duration: 2500,
-    });
+  updateEstadio(estadioId: string) {
+    this.router.navigate(['estadios/edit', estadioId]);
   }
 }

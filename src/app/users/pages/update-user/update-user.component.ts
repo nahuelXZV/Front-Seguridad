@@ -31,15 +31,15 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-  if (id !== null) {
-    this.userId = id;
-    this.loadUser(this.userId);
-  } else {
-    // Manejar el caso en el que el ID es nulo, por ejemplo, redirigiendo a una página de error o mostrando un mensaje al usuario.
-    console.log('error');
-  }
-
-  }
+    if (id !== null) {
+      this.userId = id;
+      this.loadUser(this.userId);
+    } else {
+      // Manejar el caso en el que el ID es nulo, por ejemplo, redirigiendo a una página de error o mostrando un mensaje al usuario.
+      console.log('error');
+    }
+  
+    }
 
   loadUser(userId: string): void {
     this.userService.getUser(userId).subscribe(user => {

@@ -1,0 +1,49 @@
+<h2>Crear Estadio</h2>
+
+<mat-card>
+  <mat-card-content>
+
+    <form class="h-full grid grid-cols-1 md:grid-cols-2 " [formGroup]="estadioForm" (ngSubmit)="onSubmit()">
+
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" required formControlName="nombre" />
+        <mat-error *ngIf="isValidField('nombre')"> {{ getFieldError('nombre') }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Departamento</mat-label>
+        <input matInput type="text" required formControlName="departamento" />
+        <mat-error *ngIf="isValidField('departamento')"> {{ getFieldError('departamento') }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Ciudad</mat-label>
+        <input matInput type="ciudad" required formControlName="ciudad" />
+        <mat-error *ngIf="isValidField('ciudad')"> {{ getFieldError('ciudad') }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Direccion</mat-label>
+        <input matInput type="direccion" required formControlName="direccion" />
+        <mat-error *ngIf="isValidField('direccion')"> {{ getFieldError('direccion') }} </mat-error>
+      </mat-form-field>
+
+
+      <span class="col-span-1"></span>
+
+      <div class="flex w-full justify-content-between">
+        <button mat-flat-button color="primary" type="submit" [disabled]="!estadioForm.valid">
+          <mat-icon>save</mat-icon>
+          Guardar
+        </button>
+
+        <button mat-flat-button   type="submit" (click)="cancelar()" style="background-color: #e0d3d3;" class="ml-5">
+          <mat-icon>close</mat-icon>
+          Cancelar
+        </button>
+
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
