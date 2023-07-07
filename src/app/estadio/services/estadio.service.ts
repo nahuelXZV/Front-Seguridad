@@ -39,7 +39,4 @@ export class EstadioService {
         catchError(err => of(false)),
       );
   }
-
-
-
 }

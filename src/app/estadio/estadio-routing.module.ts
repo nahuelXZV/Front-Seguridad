@@ -4,6 +4,8 @@ import { AuthenticationGuard } from '../auth/guards/authentication.guard';
 
 import { EstadioPageComponent } from './pages/estadio-page/estadio-page.component';
 import { EstadiosComponent } from './pages/estadios/estadios.component';
+import { CreateEstadioComponent } from './pages/create-estadio/create-estadio.component';
+import { UpdateEstadioComponent } from './pages/update-estadio/update-estadio.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,16 @@ const routes: Routes = [
       {
         path: 'list',
         component: EstadiosComponent,
+      },
+      {
+        path: 'create',
+        component: CreateEstadioComponent,
+        data: { name: 'create-estadio' },
+      },
+      {
+        path: 'edit/:id',
+        component: UpdateEstadioComponent,
+        data: { name: 'update-estadio' },
       },
       {
         path: '**',
