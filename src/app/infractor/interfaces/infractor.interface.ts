@@ -1,3 +1,4 @@
+import { Foto } from "./foto.interface";
 import { Huella } from "./huella.interface";
 import { Infraccion } from "./infraccion.interface";
 
@@ -12,7 +13,7 @@ export interface Infractor {
   fechaNacimiento: string;
   sexo: string;
   otros: string;
-  fotos: string[];
+  fotos: Foto[];
   huellas: Huella[];
   infracciones: Infraccion[];
 }
