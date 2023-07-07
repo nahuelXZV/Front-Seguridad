@@ -51,7 +51,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatMenuModule,
     MatRadioModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
   ]
 })
 export class MaterialModule { }

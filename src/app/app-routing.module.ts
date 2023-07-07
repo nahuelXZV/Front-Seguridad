@@ -34,7 +34,10 @@ const routes: Routes = [
     path: "infractores",
     loadChildren: () => import("./infractor/infractor.module").then(m => m.InfractorModule),
     data: { name: 'infractores' }
-
+  },
+  {
+    path: "reconocimiento-entrada",
+    loadChildren: () => import("./reconocimiento-entrada/reconocimiento-entrada.module").then(m => m.ReconocimientoEntradaModule),
   },
   {
     path: '404',
