@@ -1,4 +1,4 @@
-export interface Sancion{
+export interface Sansion{
   id: string;
   createdAt: string;
   updatedAt: string;

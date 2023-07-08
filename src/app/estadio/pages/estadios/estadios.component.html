@@ -3,7 +3,7 @@
     <p class="text-lg font-bold">Estadios</p>
   </div>
 
-  <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" [routerLink]="['/estadios/create']"
+  <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" (click)="createEstadio()"
     class=" my-2 p-4">Crear Estadio</button>
 
   <mat-table [dataSource]="estadios">

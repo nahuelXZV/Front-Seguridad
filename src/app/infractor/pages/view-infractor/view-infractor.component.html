@@ -1,0 +1,79 @@
+<h2>Ver Infractor</h2>
+
+<div class="grid grid-cols-2 gap-3 ">
+
+  <mat-card>
+    <mat-card-content>
+
+      <form class="h-full grid grid-cols-1 md:grid-cols-2 " [formGroup]="infractorForm" (ngSubmit)="onSubmit()">
+        <!-- <span class="col-span-1"></span> -->
+
+        <div class="flex col-span-1 md:col-span-2 w-full items-center justify-end px-1 pb-1">
+          <ng-container *ngIf="!readonly">
+            <div>
+              <button mat-flat-button color="primary" type="submit" [disabled]="!infractorForm.valid">
+                <mat-icon>save</mat-icon>
+                Guardar
+              </button>
+              <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5" (click)="cancelar()">
+                <mat-icon>close</mat-icon>
+                Cancelar
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="readonly">
+            <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"(click)="editar()">
+              <mat-icon>edit</mat-icon>
+              Editar datos
+            </button>
+          </ng-container>
+        </div>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" required formControlName="nombre" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('nombre')"> {{ getFieldError('nombre') }} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Apellido</mat-label>
+          <input matInput type="text" required formControlName="apellido" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('apellido')"> {{ getFieldError('apellido') }} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Cedula de Identidad</mat-label>
+          <input matInput type="text" required formControlName="cedulaIdentidad" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('cedulaIdentidad')"> {{ getFieldError('cedulaIdentidad') }} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Nacionalidad</mat-label>
+          <input matInput type="text" required formControlName="nacionalidad" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('nacionalidad')"> {{ getFieldError('nacionalidad') }} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput type="text" required formControlName="fechaNacimiento" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('fechaNacimiento')"> {{ getFieldError('fechaNacimiento') }} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Sexo</mat-label>
+          <input matInput type="text" required formControlName="sexo" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('sexo')"> {{ getFieldError('sexo') }} </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6 px-1 py-1">
+          <mat-label>Otros</mat-label>
+          <input matInput type="text" required formControlName="otros" [readonly]="readonly" />
+          <mat-error *ngIf="isValidField('otros')"> {{ getFieldError('otros') }} </mat-error>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+
+</div>

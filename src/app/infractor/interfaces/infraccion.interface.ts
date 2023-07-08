@@ -1,6 +1,8 @@
 import { User } from "src/app/auth/interfaces";
 import { Estadio } from "src/app/estadio/interfaces/estadio.interface";
-import { Sancion } from "./sancion.interface";
+import { Sansion } from "./sansion.interface";
+import { Testigo } from "src/app/testigos/interfaces/testigo.interface";
+import { Documento } from "./documento.interface";
 
 export interface Infraccion {
   id: string;
@@ -15,6 +17,8 @@ export interface Infraccion {
   estado: string;
   estadio: Estadio;
   creador: User;
-  sansion?: Sancion;
+  sansion?: Sansion;
+  testigos: Testigo[];
+  documentos: Documento[];
 
 }
