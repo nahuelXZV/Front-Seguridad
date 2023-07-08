@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ValidatorsService } from 'src/app/shared/services/validators.service';
 import { InfractorService } from '../../services/infractor.service';
-// import { MatCarouselModule } from '@ngbmodule/material-carousel';
-
+import { Foto } from '../../interfaces/foto.interface';
+import { Infraccion } from '../../interfaces/infraccion.interface';
 
 @Component({
   selector: 'app-view-infractor',
@@ -17,6 +17,8 @@ export class ViewInfractorComponent implements OnInit {
   id!: string;
   public readonly: boolean = true;
   public datosInfractorForm: any;
+  public fotos: Foto[] = [];
+  public infracciones: Infraccion[] = [];
   public infractorForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(1)]],
     apellido: ['', [Validators.required, Validators.minLength(1)]],
@@ -60,6 +62,8 @@ export class ViewInfractorComponent implements OnInit {
           sexo: infractor.sexo,
           otros: infractor.otros,
         });
+        this.infracciones = infractor.infracciones;
+        this.fotos = infractor.fotos;
       } else {
         // Manejar el caso en el que el infractor no exista
       }
@@ -74,7 +78,9 @@ export class ViewInfractorComponent implements OnInit {
     const infractor = this.infractorForm.value;
     this.infractorService.update(this.id, infractor).subscribe(infractor => {
       if (!infractor) return this.showSnackbar('Error al actualizar infractor, intente nuevamente');
-      this.router.navigate(['/infractores/list']);
+      // this.router.navigate(['/infractores/list']);
+      this.readonly = true;
+      this.loadInfractor(this.id);
       this.showSnackbar('infractor actualizado');
     });
   }

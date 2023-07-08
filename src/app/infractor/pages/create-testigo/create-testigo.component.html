@@ -1,62 +1,57 @@
-<!-- <h2>Ver Infractor</h2>
+<h2>Crear Testigo</h2>
 
 <mat-card>
   <mat-card-content>
 
-    <form class="h-full grid grid-cols-1 md:grid-cols-2 " [formGroup]="infractorForm" (ngSubmit)="onSubmit()">
+    <form class="h-full grid grid-cols-1 md:grid-cols-2 " [formGroup]="testigoForm" (ngSubmit)="onSubmit()">
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Nombre</mat-label>
+        <mat-label>nombre</mat-label>
         <input matInput type="text" required formControlName="nombre" />
         <mat-error *ngIf="isValidField('nombre')"> {{ getFieldError('nombre') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Apellido</mat-label>
+        <mat-label>apellido</mat-label>
         <input matInput type="text" required formControlName="apellido" />
         <mat-error *ngIf="isValidField('apellido')"> {{ getFieldError('apellido') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Cedula de Identidad</mat-label>
+        <mat-label>telefono</mat-label>
+        <input matInput type="text" required formControlName="telefono" />
+        <mat-error *ngIf="isValidField('telefono')"> {{ getFieldError('telefono') }} </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Cedula Identidad</mat-label>
         <input matInput type="text" required formControlName="cedulaIdentidad" />
         <mat-error *ngIf="isValidField('cedulaIdentidad')"> {{ getFieldError('cedulaIdentidad') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Nacionalidad</mat-label>
+        <mat-label>nacionalidad</mat-label>
         <input matInput type="text" required formControlName="nacionalidad" />
         <mat-error *ngIf="isValidField('nacionalidad')"> {{ getFieldError('nacionalidad') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput type="text" required formControlName="fechaNacimiento" />
-        <mat-error *ngIf="isValidField('fechaNacimiento')"> {{ getFieldError('fechaNacimiento') }} </mat-error>
+        <mat-label>Seleccione un sexo</mat-label>
+        <mat-select [(value)]="sexoSelected">
+          <mat-option *ngFor="let sexo of sexos" value={{sexo}}>{{sexo}}</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Sexo</mat-label>
-        <input matInput type="text" required formControlName="sexo" />
-        <mat-error *ngIf="isValidField('sexo')"> {{ getFieldError('sexo') }} </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>Otros</mat-label>
-        <input matInput type="text" required formControlName="otros" />
-        <mat-error *ngIf="isValidField('otros')"> {{ getFieldError('otros') }} </mat-error>
-      </mat-form-field>
-
-
+      <span class="col-span-1"></span>
       <span class="col-span-1"></span>
 
       <div class="flex w-full justify-content-between">
-        <button mat-flat-button color="primary" type="submit" [disabled]="!infractorForm.valid">
+        <button mat-flat-button color="primary" type="submit" [disabled]="!testigoForm.valid">
           <mat-icon>save</mat-icon>
           Guardar
         </button>
 
-        <button mat-flat-button   type="submit" (click)="cancelar()" style="background-color: #e0d3d3;" class="ml-5">
+        <button mat-flat-button  type="submit" (click)="cancelar()" style="background-color: #e0d3d3;" class="ml-5">
           <mat-icon>close</mat-icon>
           Cancelar
         </button>
@@ -65,4 +60,4 @@
     </form>
   </mat-card-content>
 </mat-card>
- -->
+
