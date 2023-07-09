@@ -23,6 +23,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule, _MatTableDataSource } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -51,7 +53,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatMenuModule,
     MatRadioModule,
     MatTabsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule
   ]
 })
 export class MaterialModule { }

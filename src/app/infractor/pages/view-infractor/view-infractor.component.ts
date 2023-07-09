@@ -15,7 +15,10 @@ import { Infraccion } from '../../interfaces/infraccion.interface';
 export class ViewInfractorComponent implements OnInit {
 
   id!: string;
+  public sexos : string[] = ['masculino', 'femenino', 'otro'];
+  sexoSelected = '';
   public readonly: boolean = true;
+  public readonlyFoto: boolean = true;
   public datosInfractorForm: any;
   public fotos: Foto[] = [];
   public infracciones: Infraccion[] = [];
@@ -40,6 +43,7 @@ export class ViewInfractorComponent implements OnInit {
 
   ngOnInit(): void {
     this.readonly = true;
+    this.readonlyFoto = true;
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       this.id = id;
@@ -64,6 +68,7 @@ export class ViewInfractorComponent implements OnInit {
         });
         this.infracciones = infractor.infracciones;
         this.fotos = infractor.fotos;
+        this.sexoSelected = infractor.sexo;
       } else {
         // Manejar el caso en el que el infractor no exista
       }
@@ -78,7 +83,6 @@ export class ViewInfractorComponent implements OnInit {
     const infractor = this.infractorForm.value;
     this.infractorService.update(this.id, infractor).subscribe(infractor => {
       if (!infractor) return this.showSnackbar('Error al actualizar infractor, intente nuevamente');
-      // this.router.navigate(['/infractores/list']);
       this.readonly = true;
       this.loadInfractor(this.id);
       this.showSnackbar('infractor actualizado');

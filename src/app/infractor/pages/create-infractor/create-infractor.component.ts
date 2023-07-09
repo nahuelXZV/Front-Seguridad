@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { InfractorService } from '../../services/infractor.service';
 import { ValidatorsService } from 'src/app/shared/services/validators.service';
+import { InfractorReq } from '../../interfaces/infractorReq.interface';
 
 @Component({
   selector: 'app-create-infractor',
@@ -12,15 +13,21 @@ import { ValidatorsService } from 'src/app/shared/services/validators.service';
 })
 export class CreateInfractorComponent implements OnInit {
 
-  public estadioForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
-    departamento: ['', [Validators.required, Validators.minLength(5)]],
-    ciudad: ['', [Validators.required, Validators.minLength(5)]],
-    direccion: ['', [Validators.required, Validators.minLength(5)]],
+  public sexos : string[] = ['masculino', 'femenino', 'otro'];
+  sexoSelected = 'masculino';
+
+  public infractorForm: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.minLength(1)]],
+    apellido: ['', [Validators.required, Validators.minLength(1)]],
+    cedulaIdentidad: ['', [Validators.required, Validators.minLength(1)]],
+    nacionalidad: ['', [Validators.required, Validators.minLength(1)]],
+    fechaNacimiento: ['', [Validators.required, Validators.minLength(1)]],
+    sexo: ['', [Validators.required, Validators.minLength(1)]],
+    otros: ['', [Validators.required, Validators.minLength(1)]],
   });
 
   constructor(
-    private estadioService: InfractorService,
+    private infractorService: InfractorService,
     private validatorService: ValidatorsService,
     private fb: FormBuilder,
     private router: Router,
@@ -28,23 +35,38 @@ export class CreateInfractorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
   }
 
+
   onSubmit() {
-    if (this.estadioForm.invalid) {
-      this.estadioForm.markAllAsTouched();
+    if (this.infractorForm.invalid) {
+      this.infractorForm.markAllAsTouched();
       return;
     }
-    const estadio = this.estadioForm.value;
-    this.estadioService.create(estadio).subscribe(estadio => {
-      if (!estadio) return this.showSnackbar('Error al crear estadio, intente nuevamente');
-      this.router.navigate(['/estadios/list']);
-      this.showSnackbar('Estadio creado');
+
+    let infractorReq : InfractorReq = {
+      nombre : this.infractorForm.value.nombre,
+      apellido: this.infractorForm.value.apellido,
+      cedulaIdentidad: this.infractorForm.value.cedulaIdentidad,
+      nacionalidad: this.infractorForm.value.nacionalidad,
+      fechaNacimiento: this.infractorForm.value.fechaNacimiento,
+      sexo: this.sexoSelected,
+      otros:  this.infractorForm.value.otros,
+      huellas: [],
+    }
+
+    this.infractorService.create(infractorReq).subscribe(infractor => {
+      if (!infractor) return this.showSnackbar('Error al crear infractor, intente nuevamente');
+
+      this.router.navigate(['/infractores/list']);
+      this.showSnackbar('Infractor creado');
     });
+
   }
 
   cancelar(): void {
-    this.router.navigate(['/estadios/list']);
+    this.router.navigate(['/infractores/list']);
   }
 
   showSnackbar(message: string) {
@@ -54,11 +76,11 @@ export class CreateInfractorComponent implements OnInit {
   }
 
   isValidField(field: string): boolean | null {
-    return this.validatorService.isValidField(this.estadioForm, field);
+    return this.validatorService.isValidField(this.infractorForm, field);
   }
 
   getFieldError(field: string): string | null {
-    return this.validatorService.getFieldError(this.estadioForm, field);
+    return this.validatorService.getFieldError(this.infractorForm, field);
   }
 
 }

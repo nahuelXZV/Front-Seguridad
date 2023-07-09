@@ -35,6 +35,7 @@ import { CreateTestigoComponent } from './pages/create-testigo/create-testigo.co
     MaterialModule,
     SharedModule,
     InfractorRoutingModule
+    
   ],
 
 })
