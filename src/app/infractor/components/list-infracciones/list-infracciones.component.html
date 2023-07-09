@@ -1,0 +1,62 @@
+<div class="mt-4 mb-4 border shadow">
+  <div class="flex flex-row m-3 justify-between ">
+    <p class="!m-0 font-bold">Infracciones</p>
+    <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" (click)="createInfraccion()"
+      class=" my-2 p-4"> Registrar Infraccion </button>
+  </div>
+
+
+  <mat-table [dataSource]="infracciones" >
+
+    <ng-container matColumnDef="fecha">
+      <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.fecha }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="hora">
+      <mat-header-cell *matHeaderCellDef>Hora</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.hora }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="seccion">
+      <mat-header-cell *matHeaderCellDef>Seccion</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.seccion }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fila">
+      <mat-header-cell *matHeaderCellDef>Fila</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.fila}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="asiento">
+      <mat-header-cell *matHeaderCellDef>Asiento</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.asiento}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="descripcion">
+      <mat-header-cell *matHeaderCellDef>Descripcion</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.descripcion}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">{{ infraccion.estado}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let infraccion">
+        <button mat-icon-button (click)="viewInfraccion(infraccion.id)">
+          <mat-icon color="primary">visibility</mat-icon>
+        </button>
+        <!-- <button mat-icon-button (click)="deleteInfractor(infraccion.id)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button> -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

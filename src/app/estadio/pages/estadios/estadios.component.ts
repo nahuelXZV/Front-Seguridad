@@ -41,4 +41,8 @@ export class EstadiosComponent implements OnInit {
   updateEstadio(estadioId: string) {
     this.router.navigate(['estadios/edit', estadioId]);
   }
+
+  createEstadio() {
+    this.router.navigate(['estadios/create']);
+  }
 }

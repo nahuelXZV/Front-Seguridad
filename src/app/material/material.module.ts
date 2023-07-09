@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -23,6 +22,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule, _MatTableDataSource } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -52,7 +53,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatRadioModule,
     MatTabsModule,
     MatCheckboxModule,
-
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule
   ]
 })
 export class MaterialModule { }
