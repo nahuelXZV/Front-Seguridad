@@ -49,15 +49,15 @@
               <div class="col-1">
                 <mat-form-field class="col-1 px-1 w-full">
                   <mat-label>Nombre</mat-label>
-                  <input matInput type="text" readonly [value]="infractor?infractor.nombre : ''" />
+                  <input matInput type="text" readonly [value]="infractor.nombre" />
                 </mat-form-field>
                 <mat-form-field class="col-1 px-1 w-full">
                   <mat-label>Apellido</mat-label>
-                  <input matInput type="text" readonly [value]="infractor?infractor.apellido : ''" />
+                  <input matInput type="text" readonly [value]="infractor.apellido" />
                 </mat-form-field>
                 <mat-form-field class="col-1 px-1 w-full">
                   <mat-label>Nacionalidad</mat-label>
-                  <input matInput type="text" readonly [value]="infractor?infractor.nacionalidad : ''" />
+                  <input matInput type="text" readonly [value]="infractor.nacionalidad" />
                 </mat-form-field>
               </div>
             </div>
@@ -92,10 +92,11 @@
             </table>
           </div>
 
-          <div class="col-1 px-1 w-full col-span-3">
+          <div class="col-1 px-1 w-full col-span-3 mt-5">
             <div class="grid grid-cols-2">
               <div class="col-1 px-1 w-full">
-                <button mat-raised-button color="primary" class="w-full">Ver Expediente</button>
+                <button mat-raised-button color="primary" class="w-full"
+                  [routerLink]="['/infractores/view', infractor.id]">Ver Expediente</button>
               </div>
               <div class="col-1 px-1 w-full">
                 <button mat-raised-button color="warn" class="w-full" (click)="clean()">Limpiar</button>

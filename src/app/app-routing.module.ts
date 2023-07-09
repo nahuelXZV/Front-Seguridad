@@ -40,6 +40,14 @@ const routes: Routes = [
     loadChildren: () => import("./reconocimiento-entrada/reconocimiento-entrada.module").then(m => m.ReconocimientoEntradaModule),
   },
   {
+    path: "reconocimiento-tribuna",
+    loadChildren: () => import("./reconocimiento-tribuna/reconocimiento-tribuna.module").then(m => m.ReconocimientoTribunaModule),
+  },
+  {
+    path: "alertas",
+    loadChildren: () => import("./alerta/alerta.module").then(m => m.AlertaModule),
+  },
+  {
     path: '404',
     component: Error404PageComponent
   },
