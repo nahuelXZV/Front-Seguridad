@@ -1,0 +1,47 @@
+<div class="mt-4 mb-4 border shadow">
+  <div class="flex flex-row m-3 justify-between ">
+    <p class="!m-0 font-bold">Testigos</p>
+    <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" (click)="createTestigo()"
+      class=" my-2 p-4"> Registrar Testigo </button>
+  </div>
+
+
+  <mat-table [dataSource]="testigos" >
+
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef>nombre</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.nombre }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="apellido">
+      <mat-header-cell *matHeaderCellDef>apellido</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.apellido }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cedulaIdentidad">
+      <mat-header-cell *matHeaderCellDef>Cedula Identidad</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.cedulaIdentidad}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nacionalidad">
+      <mat-header-cell *matHeaderCellDef>nacionalidad</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.nacionalidad}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sexo">
+      <mat-header-cell *matHeaderCellDef>sexo</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.sexo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <mat-header-cell *matHeaderCellDef>telefono</mat-header-cell>
+      <mat-cell *matCellDef="let testigo">{{ testigo.telefono}}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>
+

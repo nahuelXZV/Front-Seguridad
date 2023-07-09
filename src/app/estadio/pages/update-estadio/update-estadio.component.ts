@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EstadioService } from '../../services/estadio.service';
-import { ValidatorsService } from 'src/app/shared/services/validators.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ValidatorsService } from 'src/app/shared/services/validators.service';
+import { EstadioService } from '../../services/estadio.service';
 
 @Component({
   selector: 'estadio-update-estadio',
