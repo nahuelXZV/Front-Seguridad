@@ -4,4 +4,4 @@ export interface Foto {
   updatedAt: string;
   dir: string;
   nombre: string;
-}
+ }
