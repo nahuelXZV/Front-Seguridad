@@ -16,6 +16,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatGridListModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MaterialModule
   ]
 })
 export class UsersModule { }

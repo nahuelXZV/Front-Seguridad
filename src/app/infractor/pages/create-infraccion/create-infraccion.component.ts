@@ -17,7 +17,8 @@ export class CreateInfraccionComponent implements OnInit {
 
   estadioIdSelected = '';
   infractorId!: string;
-  public estadios : Estadio[] = [];
+  userAdmin!: string;
+  public estadios: Estadio[] = [];
   public infraccionForm: FormGroup = this.fb.group({
     fecha: ['', [Validators.required, Validators.minLength(1)]],
     hora: ['', [Validators.required, Validators.minLength(1)]],
@@ -46,10 +47,16 @@ export class CreateInfraccionComponent implements OnInit {
       console.log('error');
     }
     this.loadEstadios();
+
+    const user = localStorage.getItem('user');
+    if (user) {
+      const { id } = JSON.parse(user);
+      this.userAdmin = id;
+    }
   }
 
   loadEstadios(): void {
-    this.estadioService.getAll().subscribe( estadios => {
+    this.estadioService.getAll().subscribe(estadios => {
       if (!estadios) return this.showSnackbar('Error al obtener infraccion, intente nuevamente');
       this.estadios = estadios;
       this.estadioIdSelected = estadios[0].id;
@@ -69,9 +76,9 @@ export class CreateInfraccionComponent implements OnInit {
       fila: this.infraccionForm.value.fila,
       asiento: this.infraccionForm.value.asiento,
       descripcion: this.infraccionForm.value.descripcion,
-      estado: "nuevo",
-      infractor:  this.infractorId,
-      creador:  "4a7d4eda-8d76-4b7f-957e-4979d974a787",
+      estado: "Pendiente",
+      infractor: this.infractorId,
+      creador: this.userAdmin,
       estadio: this.estadioIdSelected,
     };
     // const infraccion = this.infraccionForm.value;

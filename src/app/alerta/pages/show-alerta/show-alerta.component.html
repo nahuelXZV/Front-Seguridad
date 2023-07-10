@@ -1,1 +1,88 @@
-<p>show-alerta works!</p>
+<div class="pb-20">
+  <h2>Ver Alerta</h2>
+
+  <div class="grid grid-cols-2 gap-3 ">
+    <mat-card>
+      <mat-card-content>
+        <form class="h-full grid grid-cols-1">
+          <div class="flex w-full items-center justify-between px-1 pb-1">
+            <p class="!m-0 font-bold text-lg">Datos de la alerta</p>
+          </div>
+          <mat-form-field class="col-6 px-1 py-1">
+            <mat-label>Motivo</mat-label>
+            <input matInput type="text" required [value]="alerta.motivo" />
+          </mat-form-field>
+          <mat-form-field class="col-6 px-1 py-1">
+            <mat-label>Fecha</mat-label>
+            <input matInput type="text" required [value]="alerta.fecha" />
+          </mat-form-field>
+          <mat-form-field class="col-6 px-1 py-1">
+            <mat-label>Hora</mat-label>
+            <input matInput type="text" required [value]="alerta.hora" />
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <div class="flex col-span-1 md:col-span-2 w-full items-center justify-between px-1 pb-1">
+          <p class="!m-0 font-bold text-lg">Foto</p>
+        </div>
+        <img src={{alerta.imagenes[0].dir}} class="w-80 h-auto object-cover" />
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- tabla de infractores -->
+
+  <div class="mt-4 mb-4 border shadow">
+    <div class="flex flex-row m-3 justify-between ">
+      <p class="!m-0 font-bold text-lg">Infractores asociados</p>
+    </div>
+
+    <mat-table [dataSource]="infractores">
+
+      <ng-container matColumnDef="nombre">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let testigo">{{ testigo.nombre }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="apellido">
+        <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
+        <mat-cell *matCellDef="let testigo">{{ testigo.apellido }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cedulaIdentidad">
+        <mat-header-cell *matHeaderCellDef>Cedula Identidad</mat-header-cell>
+        <mat-cell *matCellDef="let testigo">{{ testigo.cedulaIdentidad}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nacionalidad">
+        <mat-header-cell *matHeaderCellDef>Nacionalidad</mat-header-cell>
+        <mat-cell *matCellDef="let testigo">{{ testigo.nacionalidad}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sexo">
+        <mat-header-cell *matHeaderCellDef>Sexo</mat-header-cell>
+        <mat-cell *matCellDef="let testigo">{{ testigo.sexo}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="telefono">
+        <mat-header-cell *matHeaderCellDef>Telefono</mat-header-cell>
+        <mat-cell *matCellDef="let testigo">{{ testigo.telefono}}</mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+  </div>
+
+
+
+
+
+
+
+</div>

@@ -1,71 +1,64 @@
-
 <h2>Crear Usuario</h2>
 <hr>
-<div>
-  <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="m-2 p-4 ">
-    <mat-grid-list cols="1" rowHeight="70px" [style.width]="'20%'">
-      <mat-grid-tile>
-        <mat-form-field>
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="nombre" placeholder="Nombre">
-          <mat-error *ngIf="createForm.controls['nombre'].invalid && createForm.controls['nombre'].touched">
-            El nombre es requerido
-          </mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
 
-      <mat-grid-tile>
-        <mat-form-field>
-          <mat-label>Apellido</mat-label>
-          <input matInput formControlName="apellido" placeholder="Apellido">
-          <mat-error *ngIf="createForm.controls['apellido'].invalid && createForm.controls['apellido'].touched">
-            El apellido es requerido
-          </mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="h-full grid grid-cols-1 md:grid-cols-2 ">
 
-      <mat-grid-tile>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="Email">
-          <mat-error *ngIf="createForm.controls['email'].invalid && createForm.controls['email'].touched">
-            El email es requerido
-          </mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" placeholder="Nombre">
+        <mat-error *ngIf="createForm.controls['nombre'].invalid && createForm.controls['nombre'].touched">
+          El nombre es requerido
+        </mat-error>
+      </mat-form-field>
 
-      <mat-grid-tile>
-        <mat-form-field>
-          <mat-label>Contraseña</mat-label>
-          <input matInput formControlName="password" type="password" placeholder="Contraseña">
-          <mat-error *ngIf="createForm.controls['password'].invalid && createForm.controls['password'].touched">
-            La contraseña es requerida
-          </mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" placeholder="Apellido">
+        <mat-error *ngIf="createForm.controls['apellido'].invalid && createForm.controls['apellido'].touched">
+          El apellido es requerido
+        </mat-error>
+      </mat-form-field>
 
-      <mat-grid-tile>
-        <mat-form-field>
-          <mat-label>Rol</mat-label>
-          <mat-select formControlName="role" placeholder="Seleccionar el rol">
-            <mat-option *ngFor="let role of roles" [value]="role">
-              {{ role }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="createForm.controls['role'].invalid && createForm.controls['role'].touched">
-            El rol es requerido
-          </mat-error>
-        </mat-form-field>
-      </mat-grid-tile>
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email">
+        <mat-error *ngIf="createForm.controls['email'].invalid && createForm.controls['email'].touched">
+          El email es requerido
+        </mat-error>
+      </mat-form-field>
 
-    </mat-grid-list>
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Contraseña">
+        <mat-error *ngIf="createForm.controls['password'].invalid && createForm.controls['password'].touched">
+          La contraseña es requerida
+        </mat-error>
+      </mat-form-field>
 
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="role" placeholder="Seleccionar el rol">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="createForm.controls['role'].invalid && createForm.controls['role'].touched">
+          El rol es requerido
+        </mat-error>
+      </mat-form-field>
 
-    <button mat-raised-button style="background-color: #636e72; color: #FFFFFF;" type="submit" [disabled]="createForm.invalid" class="m-2">
-      Guardar
-    </button>
-    <button mat-raised-button color="cancel" type="submit" [routerLink]="['/users']" >
-      Cancelar
-    </button>
-  </form>
-</div>
+      <span class="col-span-1"></span>
+      <span class="col-span-1"></span>
+      <div class="flex w-full justify-content-between">
+        <button mat-flat-button color="primary" type="submit" [disabled]="createForm.invalid">
+          Guardar
+        </button>
+        <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5" [routerLink]="['/users']">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

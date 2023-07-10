@@ -32,59 +32,73 @@
           </div>
 
           <mat-form-field class="col-6 px-1">
-            <mat-label>fecha</mat-label>
+            <mat-label>Fecha</mat-label>
             <input matInput type="text" required formControlName="fecha" [readonly]="readonly" />
             <mat-error *ngIf="isValidField('fecha')"> {{ getFieldError('fecha') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6 px-1">
-            <mat-label>hora</mat-label>
+            <mat-label>Hora</mat-label>
             <input matInput type="text" required formControlName="hora" [readonly]="readonly" />
             <mat-error *ngIf="isValidField('hora')"> {{ getFieldError('hora') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6 px-1">
-            <mat-label>seccion</mat-label>
+            <mat-label>Seccion</mat-label>
             <input matInput type="text" required formControlName="seccion" [readonly]="readonly" />
             <mat-error *ngIf="isValidField('seccion')"> {{ getFieldError('seccion') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6 px-1">
-            <mat-label>fila</mat-label>
+            <mat-label>Fila</mat-label>
             <input matInput type="text" required formControlName="fila" [readonly]="readonly" />
             <mat-error *ngIf="isValidField('fila')"> {{ getFieldError('fila') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6 px-1">
-            <mat-label>asiento</mat-label>
+            <mat-label>Asiento</mat-label>
             <input matInput type="text" required formControlName="asiento" [readonly]="readonly" />
             <mat-error *ngIf="isValidField('asiento')"> {{ getFieldError('asiento') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6 px-1">
-            <mat-label>creador</mat-label>
-            <input matInput type="text" required formControlName="creador" [readonly]="readonly" />
+            <mat-label>Creador</mat-label>
+            <input matInput type="text" required formControlName="creador" readonly />
             <mat-error *ngIf="isValidField('creador')"> {{ getFieldError('creador') }} </mat-error>
           </mat-form-field>
 
-          <mat-form-field class="col-6 px-1">
-            <mat-label>estadio</mat-label>
-            <input matInput type="text" required formControlName="estadio" [readonly]="readonly" />
+          <mat-form-field class="col-6 px-1 ">
+            <mat-label>Estadio</mat-label>
+
+            <ng-template #selectEstadio>
+              <mat-select formControlName="estadio" [disabled]="readonly" required>
+                <mat-option *ngFor="let estadio of estadios" [value]="estadio.id"> {{estadio.nombre}} </mat-option>
+              </mat-select>
+            </ng-template>
+            <input matInput type="text" readonly required [value]="estadioName" *ngIf="readonly; else selectEstadio" />
             <mat-error *ngIf="isValidField('estadio')"> {{ getFieldError('estadio') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="col-6 px-1 ">
-            <mat-label>estado</mat-label>
-            <input matInput type="text" required formControlName="estado" [readonly]="readonly" />
+            <mat-label>Estado</mat-label>
+
+            <ng-template #selectEstado>
+              <mat-select formControlName="estado" [disabled]="readonly" required>
+                <mat-option [value]="'Pendiente'"> Pendiente </mat-option>
+                <mat-option [value]="'En proceso'"> En Proceso </mat-option>
+                <mat-option [value]="'Finalizado'"> Finalizado </mat-option>
+              </mat-select>
+            </ng-template>
+            <input matInput type="text" readonly required formControlName="estado"
+              *ngIf="readonly; else selectEstado" />
             <mat-error *ngIf="isValidField('estado')"> {{ getFieldError('estado') }} </mat-error>
           </mat-form-field>
 
           <mat-form-field class="flex col-span-1 md:col-span-2 w-full px-1 ">
-            <mat-label>descripcion</mat-label>
-            <input matInput type="text" required formControlName="descripcion" [readonly]="readonly" />
+            <mat-label>Descripcion</mat-label>
+            <textarea matInput type="text" required formControlName="descripcion" [readonly]="readonly"></textarea>
             <mat-error *ngIf="isValidField('descripcion')"> {{ getFieldError('descripcion') }} </mat-error>
           </mat-form-field>
-
         </form>
       </mat-card-content>
     </mat-card>
@@ -96,30 +110,39 @@
           <div class="flex col-span-1 md:col-span-2 w-full items-center justify-between px-1 pb-1">
             <p class="!m-0 font-bold">Documentos</p>
             <ng-container *ngIf="!readonlyDocumento">
-              <div>
-                <button mat-flat-button color="primary" type="submit" [disabled]="!infraccionForm.valid">
-                  <mat-icon>save</mat-icon>
-                  Guardar
-                </button>
-                <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5"
-                  (click)="cancelar()">
-                  <mat-icon>close</mat-icon>
-                  Cancelar
-                </button>
+              <div class="grid grid-cols-2">
+                <label class="block w-full">
+                  <span class="sr-only">Escoge la Foto</span>
+                  <input type="file" (change)="onFilesChange($event)" multiple
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600" />
+                </label>
+                <div class="grid grid-cols-2 px-2">
+                  <button mat-flat-button color="primary" type="submit" (click)="saveFile()" class="mx-2">
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                  </button>
+                  <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="mx-2"
+                    (click)="cancelarUpload()">
+                    <mat-icon>close</mat-icon>
+                    Cancelar
+                  </button>
+                </div>
               </div>
             </ng-container>
             <ng-container *ngIf="readonlyDocumento">
               <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"
-                (click)="editar()">
+                (click)="uploadFile()">
                 <mat-icon>note_add</mat-icon>
                 Agregar documento
               </button>
             </ng-container>
           </div>
-          <mat-grid-list cols="3" rowHeight="1:1">
-            <mat-grid-tile *ngFor="let documento of documentos">
-              <img src={{documento.dir}} class="w-36 h-36 object-cover" />
-            </mat-grid-tile>
+          <mat-grid-list cols="3" rowHeight="1:1" class="grid grid-rows-5">
+            <p class="text-start w-full" *ngFor="let documento of documentos ">
+              <!-- enumeracion -->
+              <span class="font-bold">- </span>
+              <a href={{documento.dir}} target="_blank" class="font-bold text-blue-500">{{documento.nombre}}</a>
+            </p>
           </mat-grid-list>
         </mat-card-content>
       </mat-card>
@@ -128,31 +151,90 @@
         <mat-card-content>
           <div class="flex col-span-1 md:col-span-2 w-full items-center justify-between px-1 pb-1">
             <p class="!m-0 font-bold">Sancion</p>
-            <ng-container *ngIf="!readonlySancion">
-              <div>
-                <button mat-flat-button color="primary" type="submit" [disabled]="!infraccionForm.valid">
-                  <mat-icon>save</mat-icon>
-                  Guardar
+
+            <ng-template #sancionNotCreated>
+              <!-- <ng-container *ngIf="!readonlySancion">
+                <div>
+                  <button mat-flat-button color="primary" type="submit" [disabled]="!sancionForm.valid">
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                  </button>
+                  <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5"
+                    (click)="cancelarSansion()">
+                    <mat-icon>close</mat-icon>
+                    Cancelar
+                  </button>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="readonlySancion">
+                <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"
+                  (click)="editarSancion()">
+                  <mat-icon>edit</mat-icon>
+                  Editar
                 </button>
-                <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5"
-                  (click)="cancelar()">
-                  <mat-icon>close</mat-icon>
-                  Cancelar
-                </button>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="readonlySancion">
+              </ng-container> -->
+            </ng-template>
+
+            <ng-container *ngIf="!sancion; else sancionNotCreated">
+              <ng-container *ngIf="showFormSancion">
+                <div>
+                  <button mat-flat-button color="primary" type="submit" [disabled]="!sancionForm.valid"
+                    (click)="createSancion()">
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                  </button>
+                  <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5"
+                    (click)="showFormSancion = false">
+                    <mat-icon>close</mat-icon>
+                    Cancelar
+                  </button>
+                </div>
+              </ng-container>
               <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"
-                (click)="editar()">
+                (click)="showFormSancion = true" *ngIf="!showFormSancion">
                 <mat-icon>gavel</mat-icon>
                 Agregar sancion
               </button>
             </ng-container>
+
           </div>
           <mat-grid-list cols="3" rowHeight="1:1">
-            <mat-grid-tile *ngFor="let documento of documentos">
-              <img src={{documento.dir}} class="w-36 h-36 object-cover" />
-            </mat-grid-tile>
+            <form class="h-full grid grid-cols-1 md:grid-cols-2 " [formGroup]="sancionForm" *ngIf="showFormSancion"
+              (ngSubmit)="onSubmitSancion()">
+
+              <mat-form-field class="col-6 px-1">
+                <mat-label>Nombre</mat-label>
+                <input matInput type="text" required formControlName="nombre" [readonly]="sancion? true:false" />
+                <mat-error *ngIf="isValidFieldSancion('nombre')"> {{ getFieldErrorSancion('nombre') }} </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="col-6 px-1">
+                <mat-label>Tiempo(Meses)</mat-label>
+                <input matInput type="number" required formControlName="tiempo" [readonly]="sancion? true:false" />
+                <mat-error *ngIf="isValidFieldSancion('tiempo')"> {{ getFieldErrorSancion('tiempo') }} </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="col-6 px-1">
+                <mat-label>Estado</mat-label>
+                <input matInput type="text" required formControlName="estado" [readonly]="sancion? true:false" />
+                <mat-error *ngIf="isValidFieldSancion('estado')"> {{ getFieldErrorSancion('estado') }} </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="col-6 px-1">
+                <mat-label>Fecha Inicio</mat-label>
+                <input matInput type="date" required formControlName="fechaInicio" [readonly]="sancion? true:false" />
+                <mat-error *ngIf="isValidFieldSancion('fechaInicio')"> {{ getFieldErrorSancion('fechaInicio') }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="flex col-span-1 md:col-span-2 w-full px-1 ">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput type="text" required formControlName="descripcion"
+                  [readonly]="sancion? true:false"></textarea>
+                <mat-error *ngIf="isValidFieldSancion('descripcion')"> {{ getFieldErrorSancion('descripcion') }}
+                </mat-error>
+              </mat-form-field>
+            </form>
           </mat-grid-list>
         </mat-card-content>
       </mat-card>
