@@ -14,13 +14,6 @@
       Usuarios
     </span>
   </button>
-  <button [routerLink]="['/testigos']"
-    class="flex items-center space-x-1 rounded-md px-2 py-1.5 hover:bg-gray-100 hover:text-blue-600">
-    <span class="flex flex-row items-end">
-      <mat-icon class="mr-2">people</mat-icon>
-      Testigos
-    </span>
-  </button>
   <button [routerLink]="['/estadios/list']"
     class="flex items-center space-x-1 rounded-md px-2 py-1.5 hover:bg-gray-100 hover:text-blue-600">
     <span class="flex flex-row items-end">
@@ -33,6 +26,13 @@
     <span class="flex flex-row items-end">
       <mat-icon class="mr-2">person_off</mat-icon>
       Infractores
+    </span>
+  </button>
+  <button [routerLink]="['/alertas/list']"
+    class="flex items-center space-x-1 rounded-md px-2 py-1.5 hover:bg-gray-100 hover:text-blue-600">
+    <span class="flex flex-row items-end">
+      <mat-icon class="mr-2">notifications</mat-icon>
+      Alertas
     </span>
   </button>
   <button [routerLink]="['/reconocimiento-entrada/show']"

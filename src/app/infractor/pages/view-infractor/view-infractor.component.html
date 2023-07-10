@@ -15,14 +15,16 @@
                   <mat-icon>save</mat-icon>
                   Guardar
                 </button>
-                <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5" (click)="cancelar()">
+                <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5"
+                  (click)="cancelar()">
                   <mat-icon>close</mat-icon>
                   Cancelar
                 </button>
               </div>
             </ng-container>
             <ng-container *ngIf="readonly">
-              <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"(click)="editar()">
+              <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"
+                (click)="editar()">
                 <mat-icon>edit</mat-icon>
                 Editar datos
               </button>
@@ -60,9 +62,6 @@
           </mat-form-field>
 
 
-
-
-
           <ng-container *ngIf="!readonly">
             <mat-form-field class="col-6 px-1 py-1">
               <mat-label>Seleccione un sexo</mat-label>
@@ -93,21 +92,30 @@
       <mat-card-content>
 
         <div class="flex col-span-1 md:col-span-2 w-full items-center justify-between px-1 pb-1">
-          <p class="!m-0 font-bold">Imagenes</p>
+          <p class="!m-0 font-bold">Fotos</p>
           <ng-container *ngIf="!readonlyFoto">
-            <div>
-              <button mat-flat-button color="primary" type="submit" [disabled]="!infractorForm.valid">
-                <mat-icon>save</mat-icon>
-                Guardar
-              </button>
-              <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="ml-5" (click)="cancelar()">
-                <mat-icon>close</mat-icon>
-                Cancelar
-              </button>
+            <div class="grid grid-cols-2">
+              <label class="block w-full">
+                <span class="sr-only">Escoge la Foto</span>
+                <input type="file" (change)="onFilesChange($event)" multiple
+                  class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600" />
+              </label>
+              <div class="grid grid-cols-2 px-2">
+                <button mat-flat-button color="primary" type="submit" (click)="saveFile()" class="mx-2">
+                  <mat-icon>save</mat-icon>
+                  Guardar
+                </button>
+                <button mat-flat-button type="submit" style="background-color: #e0d3d3;" class="mx-2"
+                  (click)="cancelarUpload()">
+                  <mat-icon>close</mat-icon>
+                  Cancelar
+                </button>
+              </div>
             </div>
           </ng-container>
           <ng-container *ngIf="readonlyFoto">
-            <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"(click)="editar()">
+            <button mat-flat-button type="submit" style="background-color: #636e72; color: #FFFFFF;"
+              (click)="uploadFile()">
               <mat-icon>add_photo_alternate</mat-icon>
               Agregar foto
             </button>
@@ -115,9 +123,7 @@
         </div>
         <mat-grid-list cols="3" rowHeight="1:1">
           <mat-grid-tile *ngFor="let foto of fotos">
-
-              <img src={{foto.dir}} class="w-36 h-36 object-cover"/>
-
+            <img src={{foto.dir}} class="w-36 h-36 object-cover" />
           </mat-grid-tile>
         </mat-grid-list>
       </mat-card-content>
@@ -125,5 +131,4 @@
   </div>
 
   <infractor-list-infracciones [infracciones]="infracciones" />
-
 </div>

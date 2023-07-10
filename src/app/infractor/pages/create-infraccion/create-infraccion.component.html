@@ -6,39 +6,33 @@
     <form class="h-full grid grid-cols-1 md:grid-cols-2 " [formGroup]="infraccionForm" (ngSubmit)="onSubmit()">
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>fecha</mat-label>
+        <mat-label>Fecha</mat-label>
         <input matInput type="text" required formControlName="fecha" />
         <mat-error *ngIf="isValidField('fecha')"> {{ getFieldError('fecha') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>hora</mat-label>
+        <mat-label>Hora</mat-label>
         <input matInput type="text" required formControlName="hora" />
         <mat-error *ngIf="isValidField('hora')"> {{ getFieldError('hora') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>seccion</mat-label>
+        <mat-label>Seccion</mat-label>
         <input matInput type="text" required formControlName="seccion" />
         <mat-error *ngIf="isValidField('seccion')"> {{ getFieldError('seccion') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>fila</mat-label>
+        <mat-label>Fila</mat-label>
         <input matInput type="text" required formControlName="fila" />
         <mat-error *ngIf="isValidField('fila')"> {{ getFieldError('fila') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>asiento</mat-label>
+        <mat-label>Asiento</mat-label>
         <input matInput type="text" required formControlName="asiento" />
         <mat-error *ngIf="isValidField('asiento')"> {{ getFieldError('asiento') }} </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-6 px-1 py-1">
-        <mat-label>descripcion</mat-label>
-        <input matInput type="text" required formControlName="descripcion" />
-        <mat-error *ngIf="isValidField('descripcion')"> {{ getFieldError('descripcion') }} </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-6 px-1 py-1">
@@ -47,6 +41,14 @@
           <mat-option *ngFor="let estadio of estadios" value={{estadio.id}}>{{estadio.nombre}}</mat-option>
         </mat-select>
       </mat-form-field>
+
+      <mat-form-field class="col-6 px-1 py-1">
+        <mat-label>Descripcion</mat-label>
+        <textarea matInput placeholder="Descripcion..." required formControlName="descripcion"></textarea>
+        <mat-error *ngIf="isValidField('descripcion')"> {{ getFieldError('descripcion') }} </mat-error>
+      </mat-form-field>
+
+
 
       <span class="col-span-1"></span>
       <span class="col-span-1"></span>
@@ -57,7 +59,7 @@
           Guardar
         </button>
 
-        <button mat-flat-button   type="submit" (click)="cancelar()" style="background-color: #e0d3d3;" class="ml-5">
+        <button mat-flat-button type="submit" (click)="cancelar()" style="background-color: #e0d3d3;" class="ml-5">
           <mat-icon>close</mat-icon>
           Cancelar
         </button>
@@ -66,4 +68,3 @@
     </form>
   </mat-card-content>
 </mat-card>
-

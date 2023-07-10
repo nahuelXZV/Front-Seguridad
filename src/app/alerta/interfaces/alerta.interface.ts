@@ -9,5 +9,5 @@ export interface Alerta {
   fecha:       string;
   hora:        string;
   imagenes:    Imagene[];
-  infractores?: Infractor[];
+  infractores: Infractor[];
 }

@@ -1,1 +1,48 @@
-<p>list-alerta works!</p>
+<div class="mt-4 mb-4">
+  <div class="flex flex-row justify-between ">
+    <p class="text-lg font-bold">Alertas</p>
+  </div>
+
+  <mat-table [dataSource]="alertas">
+
+    <ng-container matColumnDef="foto">
+      <mat-header-cell *matHeaderCellDef>Foto</mat-header-cell>
+      <mat-cell *matCellDef="let alerta">
+        <div class="m-2 w-12 h-12 overflow-hidden">
+          <img [src]="obtenerRutaImagen(alerta)" class="w-12 h-12 object-cover">
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="motivo">
+      <mat-header-cell *matHeaderCellDef>Motivo</mat-header-cell>
+      <mat-cell *matCellDef="let alerta">{{ alerta.motivo | titlecase}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <mat-header-cell *matHeaderCellDef>Fecha</mat-header-cell>
+      <mat-cell *matCellDef="let alerta">{{ alerta.fecha }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="hora">
+      <mat-header-cell *matHeaderCellDef>Hora</mat-header-cell>
+      <mat-cell *matCellDef="let alerta">{{ alerta.hora }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+      <mat-cell *matCellDef="let alerta">
+        <button mat-icon-button (click)="viewAlerta(alerta.id)">
+          <mat-icon color="primary">visibility</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteAlerta(alerta.id)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+</div>

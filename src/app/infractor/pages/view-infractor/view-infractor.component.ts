@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ValidatorsService } from 'src/app/shared/services/validators.service';
 import { InfractorService } from '../../services/infractor.service';
 import { Foto } from '../../interfaces/foto.interface';
 import { Infraccion } from '../../interfaces/infraccion.interface';
+import { FotoService } from '../../services/foto.service';
 
 @Component({
   selector: 'app-view-infractor',
@@ -15,7 +16,7 @@ import { Infraccion } from '../../interfaces/infraccion.interface';
 export class ViewInfractorComponent implements OnInit {
 
   id!: string;
-  public sexos : string[] = ['masculino', 'femenino', 'otro'];
+  public sexos: string[] = ['masculino', 'femenino', 'otro'];
   sexoSelected = '';
   public readonly: boolean = true;
   public readonlyFoto: boolean = true;
@@ -32,12 +33,16 @@ export class ViewInfractorComponent implements OnInit {
     otros: ['Ninguno', [Validators.required, Validators.minLength(3)]],
   });
 
+  public fotosForm: FormGroup = this.fb.group({
+    foto: this.fb.array([]),
+  });
+
   constructor(
     private infractorService: InfractorService,
     private validatorService: ValidatorsService,
+    private fotoService: FotoService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private snackbar: MatSnackBar,
   ) { }
 
@@ -97,6 +102,35 @@ export class ViewInfractorComponent implements OnInit {
   cancelar(): void {
     this.infractorForm.patchValue(this.datosInfractorForm);
     this.readonly = true;
+  }
+
+  uploadFile() {
+    this.readonlyFoto = false;
+  }
+
+  saveFile() {
+    // console.log(this.fotosForm.value.foto);
+    this.fotoService.create(this.fotosForm.value.foto, this.id,).subscribe(foto => {
+      if (!foto) return this.showSnackbar('Error al actualizar foto, intente nuevamente');
+      this.readonlyFoto = true;
+      this.loadInfractor(this.id);
+      this.showSnackbar('Foto actualizada');
+    });
+  }
+
+  cancelarUpload() {
+    this.readonlyFoto = true;
+    this.fotosForm.reset();
+  }
+
+  onFilesChange(event: any) {
+    const formArray = this.fotosForm.get('foto') as FormArray;
+    formArray.clear();
+    const files = event.target.files;
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      formArray.push(new FormControl(file));
+    }
   }
 
   showSnackbar(message: string) {

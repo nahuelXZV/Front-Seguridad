@@ -30,6 +30,7 @@ export class InfraccionService {
   }
 
   update(id: string, data: any): Observable<Infraccion> {
+    console.log('data', data);
     return this.http.patch<Infraccion>(`${this.baseUrl}/${id}`, data);
   }
 

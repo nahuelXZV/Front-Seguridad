@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AlertaRoutingModule } from './alerta-routing.module';
 import { ShowAlertaComponent } from './pages/show-alerta/show-alerta.component';
 import { ListAlertaComponent } from './pages/list-alerta/list-alerta.component';
+import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { ListAlertaComponent } from './pages/list-alerta/list-alerta.component';
   ],
   imports: [
     CommonModule,
-    AlertaRoutingModule
+    AlertaRoutingModule,
+    SharedModule,
+    MaterialModule
   ]
 })
 export class AlertaModule { }

@@ -9,7 +9,7 @@ import { Documento } from '../interfaces/documento.interface';
 })
 export class DocumentoService {
 
-  private baseUrl: string = environment.baseUrl + 'documento';
+  private baseUrl: string = environment.baseUrl + '/documento';
 
   constructor(private http: HttpClient) { }
 
@@ -24,8 +24,14 @@ export class DocumentoService {
       );
   }
 
-  create(data: any): Observable<Documento> {
-    return this.http.post<Documento>(`${this.baseUrl}`, data);
+  create(foto: Array<File>, data: { infraccion: string, descripcion: string }): Observable<any> {
+    const myFormData = new FormData();
+    foto.forEach(f => {
+      myFormData.append('documentos', f);
+    });
+    myFormData.append('infraccion', data.infraccion);
+    myFormData.append('descripcion', data.descripcion);
+    return this.http.post<any>(`${this.baseUrl}`, myFormData);
   }
 
   update(id: string, data: any): Observable<Documento> {
