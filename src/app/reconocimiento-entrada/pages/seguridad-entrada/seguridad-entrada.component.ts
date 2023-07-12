@@ -90,23 +90,26 @@ export class SeguridadEntradaComponent implements OnInit, OnDestroy {
       const formData = new FormData();
       if (!blob) return;
       formData.append('photo', blob, 'photo.png');
+      clearInterval(this.captureInterval);
+      console.log('Enviando foto...');
       this.reconocimientoFacialService.ReconocimientoFacial(blob)
         .pipe(
           catchError(err => of(this.infractor = undefined))
-        ).subscribe(
-          (infractorRQ) => {
-            console.log(infractorRQ);
-            this.infractor = infractorRQ;
-            this.foto = infractorRQ?.fotos[0].dir!;
-            this.estado = 'Ingreso permitido';
-            this.infractor?.infracciones.forEach(infraccion => {
-              if (infraccion.estado === 'Pendiente' || infraccion.estado === 'En proceso') {
-                this.estado = 'Ingreso denegado';
-                return;
-              }
-            });
-            return;
-          }
+        ).subscribe((infractorRQ) => {
+          console.log(infractorRQ);
+          if (!infractorRQ) return;
+          this.infractor = infractorRQ;
+          this.foto = infractorRQ?.fotos[0].dir!;
+          this.estado = 'Ingreso permitido';
+          this.infractor?.infracciones.forEach(infraccion => {
+            if (infraccion.estado === 'Pendiente' || infraccion.estado === 'En proceso') {
+              this.estado = 'Ingreso denegado';
+              return;
+            }
+          });
+          this.startCaptureInterval();
+          return;
+        }
         );
 
     }, 'image/png', 1);
