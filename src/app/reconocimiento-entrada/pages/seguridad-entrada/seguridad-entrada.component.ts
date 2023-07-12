@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ReconocimientoEntradaService } from '../../services/reconocimiento-entrada.service';
 import { Infractor } from 'src/app/infractor/interfaces/infractor.interface';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-seguridad-entrada',
@@ -89,22 +90,24 @@ export class SeguridadEntradaComponent implements OnInit, OnDestroy {
       const formData = new FormData();
       if (!blob) return;
       formData.append('photo', blob, 'photo.png');
-      this.reconocimientoFacialService.ReconocimientoFacial(blob).subscribe(
-        (infractorRQ) => {
-          if (infractorRQ?.infracciones.length === 0 || infractorRQ?.infracciones === undefined) return this.infractor = undefined;
-          this.infractor = infractorRQ;
-          console.log(this.infractor);
-          this.foto = infractorRQ?.fotos[0].dir!;
-          this.estado = 'Ingreso permitido';
-          this.infractor?.infracciones.forEach(infraccion => {
-            if (infraccion.estado === 'Pendiente' || infraccion.estado === 'En proceso') {
-              this.estado = 'Ingreso denegado';
-              return;
-            }
-          });
-          return;
-        }
-      );
+      this.reconocimientoFacialService.ReconocimientoFacial(blob)
+        .pipe(
+          catchError(err => of(this.infractor = undefined))
+        ).subscribe(
+          (infractorRQ) => {
+            console.log(infractorRQ);
+            this.infractor = infractorRQ;
+            this.foto = infractorRQ?.fotos[0].dir!;
+            this.estado = 'Ingreso permitido';
+            this.infractor?.infracciones.forEach(infraccion => {
+              if (infraccion.estado === 'Pendiente' || infraccion.estado === 'En proceso') {
+                this.estado = 'Ingreso denegado';
+                return;
+              }
+            });
+            return;
+          }
+        );
 
     }, 'image/png', 1);
   }
@@ -117,7 +120,7 @@ export class SeguridadEntradaComponent implements OnInit, OnDestroy {
       });
       this.running = false;
       clearInterval(this.captureInterval);
-      this.clean();
+      // this.clean();
     }
   }
 

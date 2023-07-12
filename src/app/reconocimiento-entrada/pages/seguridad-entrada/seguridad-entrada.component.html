@@ -85,7 +85,7 @@
                 <tr *ngFor="let infraccion of infractor.infracciones">
                   <td class="border px-4 py-2">{{ infraccion.fecha }}</td>
                   <td class="border px-4 py-2">{{ infraccion.hora }}</td>
-                  <td class="border px-4 py-2">{{ infraccion.estadio?.nombre }}</td>
+                  <td class="border px-4 py-2">{{ infraccion.estadio.nombre }}</td>
                   <td class="border px-4 py-2">{{ infraccion.estado }}</td>
                 </tr>
               </tbody>
