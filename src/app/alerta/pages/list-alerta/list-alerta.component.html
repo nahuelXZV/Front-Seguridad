@@ -3,8 +3,7 @@
     <p class="text-lg font-bold">Alertas</p>
   </div>
 
-  <mat-table [dataSource]="alertas">
-
+  <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="foto">
       <mat-header-cell *matHeaderCellDef>Foto</mat-header-cell>
       <mat-cell *matCellDef="let alerta">
@@ -43,6 +42,7 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users" class="w-full"></mat-paginator>
 
 </div>

@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { ReconocimientoTribunaService } from '../../services/reconocimiento-tribuna.service';
 import { Alerta } from 'src/app/alerta/interfaces/alerta.interface';
 import { FilesetResolver, ImageClassifier, Detection, Classifications, ImageClassifierResult } from '@mediapipe/tasks-vision';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-seguridad-tribuna',
@@ -55,7 +56,7 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
     this.imageClassifier = await ImageClassifier.createFromOptions(
       vision,
       {
-        baseOptions: { modelAssetPath: `assets/modelo_mediapipe/model_gradas2.tflite` },
+        baseOptions: { modelAssetPath: `assets/modelo_mediapipe/modelo_tribuna_final.tflite` },
         maxResults: 2,
         runningMode: "IMAGE"
       }
@@ -110,13 +111,12 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
       reader.readAsDataURL(blob);
       reader.onload = (e: any) => {
         image.src = e.target.result;
-        image.onload = () => {
+        image.onload = async () => {
           const imageClassifierResult = this.imageClassifier?.classify(image);
           console.log(imageClassifierResult?.classifications[0]?.categories[0]?.categoryName + ': ' + imageClassifierResult?.classifications[0]?.categories[0]?.score);
           const score = imageClassifierResult?.classifications[0]?.categories[0]?.score || 0;
           if (score >= 0.8) {
-            clearInterval(this.captureInterval);
-            this.createAlarma(blob, imageClassifierResult?.classifications[0]?.categories[0]?.categoryName || '');
+            await this.createAlarma(blob, imageClassifierResult?.classifications[0]?.categories[0]?.categoryName || '');
           }
         };
       };
@@ -130,16 +130,16 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
       motivo: motivo,
       fecha: new Date().toISOString().slice(0, 10),
       hora: new Date().toISOString().slice(11, 19),
-    }).subscribe(
-      (alertaDB) => {
-        if (!alertaDB) return this.alerta = undefined;
-        this.alerta = alertaDB;
-        console.log(this.alerta);
-        this.foto = this.alerta.imagenes[0].dir;
-        this.startCaptureInterval();
-        return;
-      }
-    );
+    }).pipe(
+      catchError((error) => of(this.alerta = undefined))
+    ).subscribe((alertaDB) => {
+      if (!alertaDB) return;
+      this.clean();
+      this.alerta = alertaDB;
+      console.log(this.alerta);
+      this.foto = this.alerta.imagenes[0].dir;
+      return;
+    });
   }
 
   stop() {
@@ -150,7 +150,7 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
       });
       this.running = false;
       clearInterval(this.captureInterval);
-      this.clean();
+      // this.clean();
     }
   }
 

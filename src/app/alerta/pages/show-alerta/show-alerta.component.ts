@@ -16,9 +16,14 @@ export class ShowAlertaComponent {
 
   public id!: string;
   public alerta!: Alerta;
-  public infractores!: Infractor[];
+  public infractores!: {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    infractor: Infractor;
+  }[];
   infractorId!: string;
-  displayedColumns: string[] = ['nombre','apellido', 'cedulaIdentidad', 'nacionalidad', 'sexo','telefono'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'cedulaIdentidad', 'nacionalidad', 'sexo'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

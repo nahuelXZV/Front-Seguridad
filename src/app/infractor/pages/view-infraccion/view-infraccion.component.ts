@@ -190,7 +190,7 @@ export class ViewInfraccionComponent implements OnInit {
     this.showFormSancion = false;
     this.sancionService.create({ ...this.sancionForm.value, infraccion: this.infraccionId }).subscribe(sancion => {
       if (!sancion) return this.showSnackbar('Error al crear sancion, intente nuevamente');
-      this.sancion = sancion;
+      this.loadInfraccion(this.infraccionId);
       this.showSnackbar('Sancion creada');
     });
 

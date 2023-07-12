@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { Imagene } from '../../interfaces/imagen.interface';
 import { AlertaService } from '../../services/alerta.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list-alerta',
@@ -14,6 +15,7 @@ import { AlertaService } from '../../services/alerta.service';
 export class ListAlertaComponent {
   public alertas: Alerta[] = [];
   displayedColumns: string[] = ['foto', 'motivo', 'fecha', 'hora', 'acciones'];
+  dataSource!: MatTableDataSource<Alerta>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -23,6 +25,14 @@ export class ListAlertaComponent {
     private router: Router,
   ) { }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   ngOnInit(): void {
     this.loadAlertas();
   }
@@ -30,6 +40,9 @@ export class ListAlertaComponent {
   loadAlertas() {
     this.alertaService.getAll().subscribe(alertas => {
       this.alertas = alertas;
+      this.dataSource = new MatTableDataSource(this.alertas);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 

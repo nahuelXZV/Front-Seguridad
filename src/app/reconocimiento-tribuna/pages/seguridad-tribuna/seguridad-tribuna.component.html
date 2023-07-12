@@ -44,7 +44,7 @@
           <div class="col-1 px-1 py-1 w-full col-span-3 justify-between">
             <div class="grid grid-cols-2">
               <div class="col-1 px-1 w-full h-auto flex items-center text-center justify-center">
-                <img [src]="foto" alt="foto" class="w-40 h-52 rounded-md" />
+                <img [src]="foto" alt="foto" class="w-52 h-52 rounded-md" />
               </div>
               <div class="col-1">
                 <mat-form-field class="col-1 px-1 w-full">
@@ -71,7 +71,7 @@
           <div class="col-1 px-1 py-1 w-full col-span-3 justify-between">
             <p class="text-xl font-semibold">Infractores asociados</p>
           </div>
-          <div class="col-1 px-1 py-1 w-full col-span-3 justify-between">
+          <div class="col-1 px-1 py-1 w-full col-span-3 justify-between text-black">
             <table class="table-auto w-full">
               <thead class="bg-gray-100">
                 <tr>
@@ -81,18 +81,15 @@
                   <th class="px-4 py-2">CI</th>
                 </tr>
               </thead>
-              <tbody *ngIf="alerta">
-                <tr *ngFor="let infractor of alerta.infractores">
+
+              <tbody>
+                <tr *ngFor="let infractorAlerta of alerta.infractores">
                   <!-- pequeña foto -->
-                  <td class="border px-4 py-2">
-                    <div class="m-2 w-12 h-12 rounded-full overflow-hidden">
-                      <img [src]="infractor.fotos[0].dir" class="w-12 h-12 object-cover">
-                    </div>
-                  </td>
-                  <td class="border px-4 py-2">{{ infractor.nombre }}</td>
-                  <td class="border px-4 py-2">{{ infractor.apellido }}</td>
-                  <td class="border px-4 py-2">{{ infractor.nacionalidad }}</td>
-                  <td class="border px-4 py-2">{{ infractor.cedulaIdentidad }}</td>
+                  <!-- {{ infractorAlerta.infractor | json }} -->
+                  <td class="border px-4 py-2">{{ infractorAlerta.infractor.nombre }}</td>
+                  <td class="border px-4 py-2">{{ infractorAlerta.infractor.apellido }}</td>
+                  <td class="border px-4 py-2">{{ infractorAlerta.infractor.nacionalidad }}</td>
+                  <td class="border px-4 py-2">{{ infractorAlerta.infractor.cedulaIdentidad }}</td>
                 </tr>
               </tbody>
             </table>
@@ -101,9 +98,8 @@
           <div class="col-1 px-1 w-full col-span-3 mt-5">
             <div class="grid grid-cols-2">
               <div class="col-1 px-1 w-full">
-                <button mat-raised-button color="primary" class="w-full"
-                  [routerLink]="['/alertas/show', alerta.id]"
-                >Ver Alerta</button>
+                <button mat-raised-button color="primary" class="w-full" [routerLink]="['/alertas/show', alerta.id]">Ver
+                  Alerta</button>
               </div>
               <div class="col-1 px-1 w-full">
                 <button mat-raised-button color="warn" class="w-full" (click)="clean()">Limpiar</button>

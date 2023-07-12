@@ -44,34 +44,28 @@
 
       <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-        <mat-cell *matCellDef="let testigo">{{ testigo.nombre }}</mat-cell>
+        <mat-cell *matCellDef="let infractores">{{ infractores.infractor.nombre }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="apellido">
         <mat-header-cell *matHeaderCellDef>Apellido</mat-header-cell>
-        <mat-cell *matCellDef="let testigo">{{ testigo.apellido }}</mat-cell>
+        <mat-cell *matCellDef="let infractores">{{ infractores.infractor.apellido }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="cedulaIdentidad">
         <mat-header-cell *matHeaderCellDef>Cedula Identidad</mat-header-cell>
-        <mat-cell *matCellDef="let testigo">{{ testigo.cedulaIdentidad}}</mat-cell>
+        <mat-cell *matCellDef="let infractores">{{ infractores.infractor.cedulaIdentidad}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="nacionalidad">
         <mat-header-cell *matHeaderCellDef>Nacionalidad</mat-header-cell>
-        <mat-cell *matCellDef="let testigo">{{ testigo.nacionalidad}}</mat-cell>
+        <mat-cell *matCellDef="let infractores">{{ infractores.infractor.nacionalidad}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="sexo">
         <mat-header-cell *matHeaderCellDef>Sexo</mat-header-cell>
-        <mat-cell *matCellDef="let testigo">{{ testigo.sexo}}</mat-cell>
+        <mat-cell *matCellDef="let infractores">{{ infractores.infractor.sexo}}</mat-cell>
       </ng-container>
-
-      <ng-container matColumnDef="telefono">
-        <mat-header-cell *matHeaderCellDef>Telefono</mat-header-cell>
-        <mat-cell *matCellDef="let testigo">{{ testigo.telefono}}</mat-cell>
-      </ng-container>
-
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
