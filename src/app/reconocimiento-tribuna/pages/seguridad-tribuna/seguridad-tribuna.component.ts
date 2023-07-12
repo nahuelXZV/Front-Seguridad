@@ -84,7 +84,7 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
   startCaptureInterval() {
     this.captureInterval = setInterval(() => {
       this.capturePhoto();
-    }, 10000);
+    }, 3000);
   }
 
   capturePhoto() {
@@ -115,6 +115,7 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
           console.log(imageClassifierResult?.classifications[0]?.categories[0]?.categoryName + ': ' + imageClassifierResult?.classifications[0]?.categories[0]?.score);
           const score = imageClassifierResult?.classifications[0]?.categories[0]?.score || 0;
           if (score >= 0.8) {
+            clearInterval(this.captureInterval);
             this.createAlarma(blob, imageClassifierResult?.classifications[0]?.categories[0]?.categoryName || '');
           }
         };
@@ -135,6 +136,7 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
         this.alerta = alertaDB;
         console.log(this.alerta);
         this.foto = this.alerta.imagenes[0].dir;
+        this.startCaptureInterval();
         return;
       }
     );
