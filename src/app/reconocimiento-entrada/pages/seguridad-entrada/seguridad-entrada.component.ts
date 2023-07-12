@@ -96,22 +96,22 @@ export class SeguridadEntradaComponent implements OnInit, OnDestroy {
         .pipe(
           catchError(err => of(this.infractor = undefined))
         ).subscribe((infractorRQ) => {
-          console.log(infractorRQ);
           if (!infractorRQ) return;
+          this.clean();
+          console.log("response: " + infractorRQ);
           this.infractor = infractorRQ;
+          console.log("Infractor: " + this.infractor);
           this.foto = infractorRQ?.fotos[0].dir!;
           this.estado = 'Ingreso permitido';
+          this.startCaptureInterval();
           this.infractor?.infracciones.forEach(infraccion => {
             if (infraccion.estado === 'Pendiente' || infraccion.estado === 'En proceso') {
               this.estado = 'Ingreso denegado';
               return;
             }
           });
-          this.startCaptureInterval();
           return;
-        }
-        );
-
+        });
     }, 'image/png', 1);
   }
 
