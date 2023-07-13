@@ -129,7 +129,8 @@ export class SeguridadTribunaComponent implements OnDestroy, OnInit {
     this.reconocimientoTribunaService.reconocimientoTribuna(blob, {
       motivo: motivo,
       fecha: new Date().toISOString().slice(0, 10),
-      hora: new Date().toISOString().slice(11, 19),
+      hora: new Date().toLocaleString('es-BO', { hour: 'numeric', minute: 'numeric' })
+        .slice(0, 5)
     }).pipe(
       catchError((error) => of(this.alerta = undefined))
     ).subscribe((alertaDB) => {
